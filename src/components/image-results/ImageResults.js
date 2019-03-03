@@ -8,7 +8,36 @@ import FlatButton from "material-ui/FlatButton";
 
 class ImageResults extends Component {
   render() {
-    return <div />;
+    let imageListContent;
+    const { images } = this.props;
+
+    if (images) {
+      imageListContent = (
+        <GridList cols={3}>
+          {images.map(img => (
+            <GridTile
+              title={img.tags}
+              key={img.id}
+              subtitle={
+                <span>
+                  by <strong>{img.user}</strong>
+                </span>
+              }
+              actionIcon={
+                <IconButton>
+                  <ZoomIn color="white" />
+                </IconButton>
+              }
+            >
+              <img src={img.largeImageURL} alt="" />
+            </GridTile>
+          ))}
+        </GridList>
+      );
+    } else {
+      imageListContent = null;
+    }
+    return <div>{imageListContent}</div>;
   }
 }
 
